@@ -24,3 +24,15 @@ class Item(Schema):
     description: str = None
     price: float
     quantity: int
+
+class UserSchema(Schema):
+    id: int
+    first_name: str
+    last_name: str
+
+class TaskSchema(Schema):
+    id: int
+    title: str
+    is_completed: bool
+    owner: UserSchema = None  # ! None - to mark it as optional
+

@@ -1,10 +1,13 @@
 import datetime
 from ninja import NinjaAPI
 from ninja import Path, Query
-from django.http import HttpResponse, HttpResponseRedirect
-from . import schema
-api = NinjaAPI()
+from typing import List
 
+from django.http import HttpResponse, HttpResponseRedirect
+
+from .schema import Item, TaskSchema, Filters, PathDate
+from .model import Task
+api = NinjaAPI()
 
 @api.get("/hello")
 def hello(request):
@@ -20,7 +23,7 @@ def read_item(request, item_id: int):
 
 @api.get("/events/{year}/{month}/{day}")
 
-def events(request, date: schema.PathDate = Path(...)):
+def events(request, date: PathDate = Path(...)):
     """
     path 는 path parm 이다. 더럽히지 않기 위해서 이를 클레스로 정리한게 schema
     """
@@ -49,7 +52,7 @@ def search_weapons(request, q: str, offset: int = 0):
 
 
 @api.get("/filter")
-def events(request, filters: schema.Filters = Query(...)):
+def events(request, filters: Filters = Query(...)):
     """
     :param request: query 를 숨기는 것이 가능하다
     :param filters:
@@ -62,5 +65,10 @@ def events(request, filters: schema.Filters = Query(...)):
 
 
 @api.post("/items")
-def create(request, item: schema.Item):
+def create(request, item: Item):
     return item
+
+@api.get("/tasks", response=List[TaskSchema])
+def tasks(request):
+    queryset = Task.objects.select_related("owner")
+    return list(queryset)
