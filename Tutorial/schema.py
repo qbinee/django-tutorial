@@ -36,3 +36,46 @@ class TaskSchema(Schema):
     is_completed: bool
     owner: UserSchema = None  # ! None - to mark it as optional
 
+class User(Schema):
+    id: int
+    first_name: str
+    last_name: str
+
+class UserIn(Schema):
+    username: str
+    password: str
+
+
+class UserOut(Schema):
+    id: int
+    username: str
+
+##
+class Token(Schema):
+    token: str
+    expires: datetime.date
+
+class Message(Schema):
+    message: str
+
+class EmployeeIn(Schema):
+    first_name: str
+    last_name: str
+    department_id: int = None
+    birthdate: datetime.date = None
+
+class EmployeeOut(Schema):
+    id: int
+    first_name: str
+    last_name: str
+    department_id: int = None
+    birthdate: datetime.date = None
+
+class DepartmentIn(Schema):
+    id: int
+    title: str
+
+class UserSchema(Schema):
+    id: int
+    name: str
+    email: str = None

@@ -10,7 +10,7 @@ class Question(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return self.contents
+        return self.question_text
 
     def was_published_recently(self):
         now = timezone.now()

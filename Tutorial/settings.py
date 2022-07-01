@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Tutorial.apps.TutorialConfig',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -84,8 +85,8 @@ database_list = [
     {'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'OPTIONS': {
-            'service': 'my_service',
-            'passfile': '.my_pgpass',
+            # 'service': 'my_service',
+            # 'passfile': '.my_pgpass',
             # if want to upgrade isolation level
             # import psycopg2.extensions
             # 'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
@@ -139,3 +140,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Tox
+
